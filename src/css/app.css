@@ -99,3 +99,21 @@ body.dragging * {
 #selectorRubberBand {
   shape-rendering: crispEdges;
 }
+
+#resolution_label {
+  display: flex;
+  height:100%;
+  width:100%;
+  background-position: center center;
+  margin: 0;
+}
+#resolution_label.portrait {
+  background: url(../images/portrait.svg) no-repeat center;
+  background-size: 24px;
+
+}
+
+#resolution_label.landscape {
+  background: url(../images/landscape.svg) no-repeat center;
+  background-size: 24px;
+}

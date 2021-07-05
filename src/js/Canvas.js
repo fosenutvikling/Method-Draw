@@ -10,19 +10,11 @@ MD.Canvas = function(){
     workarea.className = mode;
   })
 
-  $('#resolution').change(function(){
+  $('#resolution').change(function(e){
     var w = $('#canvas_width')[0];
     var h = $('#canvas_height')[0];
-    if(!this.selectedIndex) {
-      $('#resolution_label').html("Custom");
-      w.removeAttribute("readonly");
-      w.focus();
-      w.select();
-      if(w.value === 'fit') {
-        w.value = 100
-        h.value = 100
-      }
-    } else if(this.value === 'content') {
+    
+    if(this.value === 'content') {
       $('#resolution_label').html("Custom");
       w.value = 'fit'
       h.value = 'fit'
@@ -46,14 +38,14 @@ MD.Canvas = function(){
         tick = (Math.pow((tick-1), 3) +1);
         w.value = (dims[0] - diff_w + (tick*diff_w)).toFixed(0);
         h.value = (dims[1] - diff_h + (tick*diff_h)).toFixed(0);
-        changeSize();
-        if (tick >= 1) {
-          var res = svgCanvas.getResolution()
-          $('#canvas_width').val(res.w.toFixed())
-          $('#canvas_height').val(res.h.toFixed())
-          $('#resolution_label').html("<div class='pull'>" + res.w + "<span>×</span></br>" + res.h + "</div>");
+
+        let selectedChild = e.target.options.item(e.target.selectedIndex);
+        if(selectedChild!=null) {
+          document.getElementById("resolution_label").className=selectedChild.getAttribute("data-value");
         }
-        else {
+        
+        changeSize();
+        if (tick < 1) {
           requestAnimationFrame(animateCanvasSize)
         }
       }
