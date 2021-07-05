@@ -98,7 +98,7 @@ gulp.task('reload', function (done) {
 
 gulp.task('watch', function () {
   gulp.watch('src/css/*.css', gulp.series('css', 'reload'));
-  gulp.watch(['src/js/*.js', 'src/lib/*.js'], gulp.series('js', 'reload'));
+  gulp.watch(['src/js/*.js', 'src/lib/*.js'], gulp.series('js', 'index', 'reload'));
   gulp.watch('src/js/loading.js', gulp.series('loading', 'reload'));
   gulp.watch('src/*.html', gulp.series('index', 'reload'));
   gulp.watch('src/site.webmanifest', gulp.series('manifest', 'reload'));
