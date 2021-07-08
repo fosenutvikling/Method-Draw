@@ -5923,8 +5923,6 @@ this.setSvgString = function(xmlString) {
     this.contentW = attrs['width'];
     this.contentH = attrs['height'];
     
-    $("#canvas_width").val(this.contentW)
-    $("#canvas_height").val(this.contentH)
     var background = $("#canvas_background")
     if (background.length) {
       var opacity = background.attr("fill-opacity")

@@ -1,7 +1,5 @@
 MD.Panel = function(){
 
-    $('#canvas_height').dragInput({ min: 10,   max: null,  step: 10,  callback: editor.canvas.changeSize,   cursor: false, dragAdjust: .1 }); 
-    $('#canvas_width') .dragInput({ min: 10,   max: null,  step: 10,  callback: editor.canvas.changeSize,   cursor: false, dragAdjust: .1 });                         
     $('#rect_width')   .dragInput({ min: 1,    max: null,  step:  1,  callback: editor.changeAttribute,     cursor: false  }); 
     $('#rect_height')  .dragInput({ min: 1,    max: null,  step:  1,  callback: editor.changeAttribute,     cursor: false  });
     $('#ellipse_cx')   .dragInput({ min: 1,    max: null,  step:  1,  callback: editor.changeAttribute,     cursor: false  });

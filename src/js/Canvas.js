@@ -11,24 +11,9 @@ MD.Canvas = function(){
   })
 
   $('#resolution').change(function(e){
-    var w = $('#canvas_width')[0];
-    var h = $('#canvas_height')[0];
-    
-    if(this.value === 'content') {
-      $('#resolution_label').html("Custom");
-      w.value = 'fit'
-      h.value = 'fit'
-      changeSize();
-      var res = svgCanvas.getResolution()
-      w.value = res.w
-      h.value = res.h
-      
-    } else {
       var dims = this.value.split('x');
       dims[0] = parseInt(dims[0]); 
       dims[1] = parseInt(dims[1]);
-      var diff_w = dims[0] - w.value;
-      var diff_h = dims[1] - h.value;
       //animate
       var start = Date.now();
       var duration = 1000;
@@ -36,35 +21,28 @@ MD.Canvas = function(){
         var progress = Date.now() - start;
         var tick = progress / duration;
         tick = (Math.pow((tick-1), 3) +1);
-        w.value = (dims[0] - diff_w + (tick*diff_w)).toFixed(0);
-        h.value = (dims[1] - diff_h + (tick*diff_h)).toFixed(0);
 
         let selectedChild = e.target.options.item(e.target.selectedIndex);
         if(selectedChild!=null) {
           document.getElementById("resolution_label").className=selectedChild.getAttribute("data-value");
         }
         
-        changeSize();
+        changeSize(dims[0], dims[1]);
         if (tick < 1) {
           requestAnimationFrame(animateCanvasSize)
         }
       }
       animateCanvasSize()
 
-    }
   });
 
   function resize(w, h){
     const res = svgCanvas.setResolution(w, h);
     if (!res) return $.alert("No content to fit to");
     if (w === 'fit' || h === 'fit') state.set("canvasSize", res);
-    $("#canvas_width").val(w);
-    $("#canvas_height").val(h);
   }
 
-  function changeSize(attr, val, completed){
-    const w = $("#canvas_width").val();
-    const h = $("#canvas_height").val();
+  function changeSize(w, h){
     state.set("canvasSize", [w,h]);
     if (completed) editor.saveCanvas();
   }

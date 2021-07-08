@@ -36,8 +36,6 @@ window.methodDraw = function() {
   Editor.init = function() {
 
     $("body").toggleClass("touch", svgedit.browser.isTouch());
-    $("#canvas_width").val(curConfig.dimensions[0]);
-    $("#canvas_height").val(curConfig.dimensions[1]);
 
 
     Editor.canvas = svgCanvas;
@@ -1350,61 +1348,16 @@ window.methodDraw = function() {
     }
       
   var changeCanvasSize = function(ctl){
-    var width = $("#canvas_width");
-    var height = $("#canvas_height");
-    var w = width.val();
-    var h = height.val()
-    
-    if(w != "fit" && !svgedit.units.isValidUnit('width', w)) {
-      $.alert("Invalid value given");
-      width.parent().addClass('error');
-      return false;
-    }
-
-    width.parent().removeClass('error');
-
-    if(h != "fit" && !svgedit.units.isValidUnit('height', h)) {
-      $.alert("Invalid value given");
-      height.parent().addClass('error');
-      return false;
-    } 
-    height.parent().removeClass('error');
-    if(!svgCanvas.setResolution(w, h)) {
-      $.alert("No content to fit to");
-      var dims = svgCanvas.getResolution()
-      width.val(dims.w)
-      height.val(dims.h)
-      return false;
-    }
-     updateCanvas();
+       updateCanvas();
   }
   
     $('#resolution').change(function(){
-      var w = $('#canvas_width')[0];
-      var h = $('#canvas_height')[0];
-      if(!this.selectedIndex) {
-        $('#resolution_label').html("Custom");
-        w.removeAttribute("readonly");
-        w.focus();
-        w.select();
-        if(w.value == 'fit') {
-          w.value = 100
-          h.value = 100
-        }
-      } else if(this.value == 'content') {
-        w.value = 'fit'
-        h.value = 'fit'
+      if(this.value == 'content') {
         changeCanvasSize();
-        var res = svgCanvas.getResolution()
-        w.value = res.w
-        h.value = res.h
-        
       } else {
         var dims = this.value.split('x');
         dims[0] = parseInt(dims[0]); 
         dims[1] = parseInt(dims[1]);
-        var diff_w = dims[0] - w.value;
-        var diff_h = dims[1] - h.value;
         //animate
         var start = Date.now();
         var duration = 1000;
@@ -1412,13 +1365,9 @@ window.methodDraw = function() {
           var progress = Date.now() - start;
           var tick = progress / duration;
           tick = (Math.pow((tick-1), 3) +1);
-          w.value = (dims[0] - diff_w + (tick*diff_w)).toFixed(0);
-          h.value = (dims[1] - diff_h + (tick*diff_h)).toFixed(0);
           changeCanvasSize();
           if (tick >= 1) {
             var res = svgCanvas.getResolution()
-            $('#canvas_width').val(res.w.toFixed())
-            $('#canvas_height').val(res.h.toFixed())
             $('#resolution_label').html("<div class='pull'>" + res.w + "<span>×</span></br>" + res.h + "</div>");
           }
           else {
@@ -1681,8 +1630,6 @@ window.methodDraw = function() {
     });
   
     
-    $('#canvas_height').dragInput({ min: 10,   max: null,  step: 10,  callback: changeCanvasSize,    cursor: false, dragAdjust: .1         }); 
-    $('#canvas_width') .dragInput({ min: 10,   max: null,  step: 10,  callback: changeCanvasSize,    cursor: false, dragAdjust: .1         });                         
     $('#rect_width')   .dragInput({ min: 1,    max: null,  step:  1,  callback: changeAttribute,     cursor: false                         }); 
     $('#rect_height')  .dragInput({ min: 1,    max: null,  step:  1,  callback: changeAttribute,     cursor: false                         });
     $('#ellipse_cx')   .dragInput({ min: 1,    max: null,  step:  1,  callback: changeAttribute,     cursor: false                         });
