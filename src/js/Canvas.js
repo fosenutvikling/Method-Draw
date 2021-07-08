@@ -44,7 +44,7 @@ MD.Canvas = function(){
 
   function changeSize(w, h){
     state.set("canvasSize", [w,h]);
-    if (completed) editor.saveCanvas();
+    editor.saveCanvas();
   }
 
   function update(center, new_ctr) {
