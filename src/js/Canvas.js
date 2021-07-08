@@ -114,11 +114,7 @@ MD.Canvas = function(){
     workarea.scroll();
   }
 
-
-  rename(state.get("canvasTitle"));
-
   this.resize = resize;
   this.update = update;
-  this.rename = rename;
   this.changeSize = changeSize;
 }

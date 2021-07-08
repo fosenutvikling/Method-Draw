@@ -17,7 +17,6 @@ editor.pan = new MD.Pan();
 editor.import = new MD.Import();
 editor.contextMenu = new MD.ContextMenu();
 editor.darkmode = new MD.Darkmode();
-editor.title = new MD.Title();
 
 // bind the selected event to our function that handles updates to the UI
 svgCanvas.bind("selected", editor.selectedChanged);
@@ -33,7 +32,6 @@ const eyedropper = svgCanvas.addExtension.apply(this, ["eyedropper", MD.Eyedropp
 state.set("canvasId", t("Untitled"));
 state.set("canvasMode", state.get("canvasMode"));
 svgCanvas.setSvgString(state.get("canvasContent"));
-state.set("canvasTitle", svgCanvas.getDocumentTitle());
 
 //editor.paintBox.fill.setPaint(state.get("canvasFill"));
 //editor.paintBox.stroke.setPaint(state.get("canvasStroke"));

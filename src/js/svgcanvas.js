@@ -6597,12 +6597,6 @@ this.setGroupTitle = function(val) {
   addCommandToHistory(batchCmd);
 }
 
-// Function: getDocumentTitle
-// Returns the current document title or an empty string if not found
-this.getDocumentTitle = function() {
-  return canvas.getTitle(svgcontent);
-}
-
 // Function: setDocumentTitle
 // Adds/updates a title element for the document with the given name.
 // This is an undoable action
