@@ -87,10 +87,6 @@ MD.Panel = function(){
       svgCanvas.ungroupSelectedElement();
     });
 
-    $("#canvas_title").on("click", function(){
-      $(this).focus();
-    });
-
     $('#button_group').on("click", editor.groupSelected);
     $('#button_ungroup').on("click", editor.ungroupSelected);
     
